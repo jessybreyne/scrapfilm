@@ -1,2 +1,3 @@
 static/yarn.lock
 static/node_modules
+scrapfilm/__pycache__
