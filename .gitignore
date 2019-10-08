@@ -1,2 +1,3 @@
 static/node_modules
 scrapfilm/__pycache__
+db.sqlite3
