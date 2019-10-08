@@ -16,7 +16,10 @@ class Movies(models.Model):
 class Actor(models.Model):
     first_name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
+    img = models.URLField(max_length=200)
 
+    def __str__(self):
+        return self.first_name+" "+self.surname
 #Un acteur est lié à un film, 
 #un film peut avoir plusieurs acteurs, un acteur peut avoir plusieurs film
 
