@@ -16,3 +16,10 @@ class Movies(models.Model):
 class Actor(models.Model):
     first_name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
+
+#Un acteur est lié à un film, 
+#un film peut avoir plusieurs acteurs, un acteur peut avoir plusieurs film
+
+class Movie_has_Actor(models.Model):
+    movie = models.ForeignKey("Movie.Model", on_delete=models.CASCADE)
+    acteur = models.ForeignKey("Acteur.Model", on_delete=models.CASCADE)
