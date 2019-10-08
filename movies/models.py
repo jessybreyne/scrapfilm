@@ -24,5 +24,5 @@ class Actor(models.Model):
 #un film peut avoir plusieurs acteurs, un acteur peut avoir plusieurs film
 
 class Movie_has_Actor(models.Model):
-    movie = models.ForeignKey("Movie.Model", on_delete=models.CASCADE)
-    acteur = models.ForeignKey("Acteur.Model", on_delete=models.CASCADE)
+    movie = models.ForeignKey("Movies", on_delete=models.CASCADE)
+    acteur = models.ForeignKey("Actor", on_delete=models.CASCADE)

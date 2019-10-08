@@ -1,3 +1,5 @@
 static/node_modules
 scrapfilm/__pycache__
 db.sqlite3
+movies/__pycache__
+movies/migrations/__pycache__
