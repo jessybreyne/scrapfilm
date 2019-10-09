@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 # Create your models here.
 
 # Class Movie récupéré via du scrapping
@@ -11,7 +11,7 @@ class Movies(models.Model):
     description = models.TextField(null=True)
 
     def __str__(self):
-        return self.name
+        return self.name+" "+self.years.strftime("%Y-%m-%d")
 
 # Class Actor qui sera lié à Movie via une troisième class
 
