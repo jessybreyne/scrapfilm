@@ -1,4 +1,4 @@
-from django.test import TestCase
+from django.test import TestCase,Client
 from movies.models import Movies
 from datetime import datetime,date
 # Create your tests here.
@@ -32,3 +32,10 @@ class MovieTestCase(TestCase):
         joker = Movies.objects.get(name="Joker")
         fightclub = Movies.objects.get(name="FightClub")
         self.assertEqual(joker.delete(),(1,{'movies.Movie_has_Actor': 0, 'movies.Movies': 1}))
+    
+class RouteTestCase(TestCase):
+    
+    def test_url_index_STATUS200(self):
+        c = Client()
+        response = c.get("/")
+        self.assertEqual(response.status_code,200)
