@@ -1,5 +1,6 @@
 from django.db import models
 from datetime import datetime
+import http.client
 # Create your models here.
 
 # Class Movie récupéré via du scrapping
@@ -22,10 +23,14 @@ class Actor(models.Model):
 
     def __str__(self):
         return self.first_name+" "+self.surname
-        
+
 #Un acteur est lié à un film, 
 #un film peut avoir plusieurs acteurs, un acteur peut avoir plusieurs film
 
 class Movie_has_Actor(models.Model):
     movie = models.ForeignKey("Movies", on_delete=models.CASCADE)
     acteur = models.ForeignKey("Actor", on_delete=models.CASCADE)
+
+#URL_IMG = "https://image.tmdb.org/t/p/w500/"
+class ScrappingLoader():
+    pass

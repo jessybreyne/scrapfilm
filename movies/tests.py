@@ -1,5 +1,5 @@
 from django.test import TestCase,Client
-from movies.models import Movies
+from movies.models import Movies,ScrappingLoader
 from datetime import datetime,date
 # Create your tests here.
 
@@ -40,8 +40,10 @@ class RouteTestCase(TestCase):
         response = c.get("/")
         self.assertEqual(response.status_code,200)
 
-class APILoadTestCase(TestCase):
+    def test_url_formAddMovies_STATUS200(self):
+        c = Client()
+        response = c.get("/add/")
+        self.assertEqual(response.status_code,200)
 
-    def test_loading_data_in_DB(self):
-        pass
-        
+class ScrapingTestCase(TestCase):
+    pass
