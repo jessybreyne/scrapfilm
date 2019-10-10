@@ -22,6 +22,7 @@ class Actor(models.Model):
 
     def __str__(self):
         return self.first_name+" "+self.surname
+        
 #Un acteur est lié à un film, 
 #un film peut avoir plusieurs acteurs, un acteur peut avoir plusieurs film
 

@@ -34,8 +34,14 @@ class MovieTestCase(TestCase):
         self.assertEqual(joker.delete(),(1,{'movies.Movie_has_Actor': 0, 'movies.Movies': 1}))
     
 class RouteTestCase(TestCase):
-    
+
     def test_url_index_STATUS200(self):
         c = Client()
         response = c.get("/")
         self.assertEqual(response.status_code,200)
+
+class APILoadTestCase(TestCase):
+
+    def test_loading_data_in_DB(self):
+        pass
+        
