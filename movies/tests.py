@@ -29,9 +29,10 @@ class MovieTestCase(TestCase):
         self.assertEqual(fightclub.img,"#")
     
     def test_remove_Movies(self):
-        joker = Movies.objects.get(name="Joker")
-        fightclub = Movies.objects.get(name="FightClub")
+        joker = Movies.objects.get(id=1)
+        fightclub = Movies.objects.get(id=2)
         self.assertEqual(joker.delete(),(1,{'movies.Movie_has_Actor': 0, 'movies.Movies': 1}))
+        self.assertEqual(fightclub.delete(),(1,{'movies.Movie_has_Actor': 0, 'movies.Movies': 1}))
     
 class RouteTestCase(TestCase):
 
