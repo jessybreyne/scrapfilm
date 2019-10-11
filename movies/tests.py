@@ -36,11 +36,19 @@ class MovieTestCase(TestCase):
     
 class RouteTestCase(TestCase):
 
+    #Test de l'url index renvoie un code 200
     def test_url_index_STATUS200(self):
         c = Client()
         response = c.get("/")
         self.assertEqual(response.status_code,200)
 
+    #Test de l'url detail renvoie un code 200
+    def test_url_detail_STATUS200(self):
+        c = Client()
+        response = c.get("/detailsMovies/1")
+        self.assertEqual(response.status_code,200)
+
+    #Test de l'url formAdd renvoie un code 200
     def test_url_formAddMovies_STATUS200(self):
         c = Client()
         response = c.get("/add/")
