@@ -16,9 +16,15 @@ Installation
 
 - Installer les fichiers static :
 	yarn install
+
+- Création de la BD :
+	./manage.py migrate
 	
 Lancement de l'application
 ======
 
+- Création d'un superUser :
+	./manage.py createsuperuser
+	
 - Dans le dossier scrapfilm lancer le serveur:
 	./manage.py runserver
