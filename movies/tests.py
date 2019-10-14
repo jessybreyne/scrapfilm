@@ -58,4 +58,7 @@ class RouteTestCase(TestCase):
         self.assertEqual(response.status_code,200)
 
 class ScrapingTestCase(TestCase):
-    pass
+    #Test du retour d'une liste
+    def test_retour_liste(self):
+        self.assertEqual(list,type(ScrappingLoader().scrapToDb(2)))
+
