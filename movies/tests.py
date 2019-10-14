@@ -35,7 +35,10 @@ class MovieTestCase(TestCase):
         self.assertEqual(fightclub.delete(),(1,{'movies.Movie_has_Actor': 0, 'movies.Movies': 1}))
     
 class RouteTestCase(TestCase):
-
+    
+    def setUp(self):
+        Movies.objects.create(name='Joker',img='#',rate=80,years="2019-10-09",description="C'est le joker qui est un méchant fou")
+        Movies.objects.create(name="FightClub",img='#',rate=97,years="1999-03-18",description="Brandon se tappe sur la gueule")
     #Test de l'url index renvoie un code 200
     def test_url_index_STATUS200(self):
         c = Client()
