@@ -60,5 +60,9 @@ class RouteTestCase(TestCase):
 class ScrapingTestCase(TestCase):
     #Test du retour d'une liste
     def test_retour_liste(self):
-        self.assertEqual(list,type(ScrappingLoader().scrapToDb(2)))
+        self.assertEqual(list,type(ScrappingLoader().scrapToDb(1)))
+
+    #Test liste des films non vide
+    def test_liste_films_non_vide(self):
+        assert ScrappingLoader().scrapToDb(2) != None
 
