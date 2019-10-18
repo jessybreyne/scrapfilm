@@ -4,13 +4,15 @@ import http.client
 
 import requests
 from bs4 import BeautifulSoup
+
+from dateutil import parser
 # Create your models here.
 
 # Class Movie récupéré via du scrapping
 class Movies(models.Model):
     name = models.CharField(max_length=50)
-    img = models.URLField(max_length=200)
-    rate = models.IntegerField(null=True)
+    img = models.URLField(null=True)
+    rate = models.FloatField(null=True)
     years = models.DateField(null=True,auto_now=False, auto_now_add=False)
     description = models.TextField(null=True)
 
@@ -22,7 +24,7 @@ class Movies(models.Model):
 class Actor(models.Model):
     first_name = models.CharField(max_length=50)
     surname = models.CharField(max_length=50)
-    img = models.URLField(max_length=200)
+    img = models.URLField(null=True)
 
     def __str__(self):
         return self.first_name+" "+self.surname
@@ -37,7 +39,7 @@ class Movie_has_Actor(models.Model):
 #URL_IMG = "https://image.tmdb.org/t/p/w500/"
 class ScrappingLoader():
     @staticmethod
-    def scrapToDb(nbPages):
+    def scrap(nbPages):
         listeDesFilms = []
 
         # 500 pags au total, on parcours les pages, ici on fait seulement nbPages pages
@@ -112,3 +114,11 @@ class ScrappingLoader():
                 
                 listeDesFilms.append(film)
         return listeDesFilms
+    @staticmethod
+    def toDb(nbPages):
+        listeDesFilms = ScrappingLoader().scrap(nbPages)
+        for film in listeDesFilms:
+                leFilm = Movies.objects.create(name=film["titre"],img=film["image"],rate=film["note"],years=parser.parse(film["date"]),description=film["resume"])
+                for acteur in film["acteurs"]:
+                        leActeur = Actor.objects.create(first_name=acteur["nom"], surname=acteur["role"], img=acteur["image"])
+                        Movie_has_Actor.objects.create(movie=leFilm,acteur=leActeur)

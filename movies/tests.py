@@ -51,18 +51,18 @@ class RouteTestCase(TestCase):
         response = c.get("/detailsMovies/1")
         self.assertEqual(response.status_code,200)
 
-    #Test de l'url formAdd renvoie un code 200
-    def test_url_formAddMovies_STATUS200(self):
-        c = Client()
-        response = c.get("/add/")
-        self.assertEqual(response.status_code,200)
-
 class ScrapingTestCase(TestCase):
     #Test du retour d'une liste
     def test_retour_liste(self):
-        self.assertEqual(list,type(ScrappingLoader().scrapToDb(1)))
+        self.assertEqual(list,type(ScrappingLoader().scrap(1)))
 
     #Test liste des films non vide
     def test_liste_films_non_vide(self):
-        assert ScrappingLoader().scrapToDb(2) != None
+        assert ScrappingLoader().scrap(2) != None
+
+    #Test liste des films en BD
+    def test_liste_films_en_bd(self):
+        ScrappingLoader().toDb(1)
+        self.assertTrue(Movies.objects.get(id=1)) 
+    
 
