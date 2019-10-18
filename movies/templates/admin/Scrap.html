@@ -1,0 +1,9 @@
+{% extends 'admin/change_form.html' %}
+{% block inline_field_sets %}
+    <label>Nombre de page à scrap : </label><input id='page' name='page' type="number">
+{% endblock %}
+{% block submit_buttons_bottom %}
+    <div class="submit-row">
+            <input type="submit" value="Scrap data" name="scrap">
+    </div>
+{% endblock %}
