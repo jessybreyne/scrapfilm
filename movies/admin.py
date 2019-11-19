@@ -9,8 +9,6 @@ class ActorAdmin(admin.ModelAdmin):
 class MovieHasActorAdmin(admin.ModelAdmin):
     list_display=('movie','acteur')
 class Scrap(admin.ModelAdmin):
-    change_form_template = "admin/Scrap.html"
-
     def response_change(self, request, obj):
         if "scrap" in request.POST:
             ScrappingLoader().toDb(request.POST['page'])
@@ -18,7 +16,7 @@ class Scrap(admin.ModelAdmin):
             return HttpResponseRedirect(".")
         return super().response_change(request, obj)
 
-
+admin.site.index_template = "admin/Scrap.html"
 admin.site.register(Movies,MovieAdmin)
 admin.site.register(Actor,ActorAdmin)
 admin.site.register(Movie_has_Actor,MovieHasActorAdmin)
