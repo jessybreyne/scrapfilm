@@ -1,0 +1,25 @@
+{% extends "admin/index.html" %}
+{% block sidebar %}
+    {{block.super}}
+    <div class="scrapping module">
+        <table>
+            <caption>
+                    <a href="#" class="section" title="Scrapping">Scrapping Movies</a>
+            </caption>
+            <tbody>
+                <form action="./scrap" method="POST">
+                    {% csrf_token %}
+                    <tr>
+                        <td>Nombre de page à scrap : </td>
+                        <td><input id='page' name='page' type="number" required></td>
+                        <td>
+                    <div class="submit-row">
+                        <input type="submit" value="Scrap data" name="scrap">
+                    </div>
+                </td>
+                </tr>
+                </form>
+            </tbody>
+        </table>
+    </div>
+{% endblock %}
