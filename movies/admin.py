@@ -8,13 +8,6 @@ class ActorAdmin(admin.ModelAdmin):
     list_display=('first_name','surname','img')
 class MovieHasActorAdmin(admin.ModelAdmin):
     list_display=('movie','acteur')
-class Scrap(admin.ModelAdmin):
-    def response_change(self, request, obj):
-        if "scrap" in request.POST:
-            ScrappingLoader().toDb(request.POST['page'])
-            self.message_user(request, "Le scrapping s'est bien réalisé.")
-            return HttpResponseRedirect(".")
-        return super().response_change(request, obj)
 
 admin.site.index_template = "admin/Scrap.html"
 admin.site.register(Movies,MovieAdmin)
