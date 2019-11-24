@@ -4,108 +4,66 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>{% block title %}{% endblock %}</title>
-  <link rel="stylesheet" href="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.min.css">
+  {% load static %}
+  <script type="text/javascript" src="{% static "main.bundle.js" %}"></script>
 </head>
-<body>
-  
-  <div class="top-bar">
-    <div class="top-bar-left">
-      <ul class="menu">
-        <li class="menu-text">Scrap film</li>
-        <li><a href="#">One</a></li>
-        <li><a href="#">Two</a></li>
-      </ul>
-    </div>
-    <div class="top-bar-right">
-      <ul class="menu">
-        <li><a href="#">Three</a></li>
-        <li><a href="#">Four</a></li>
-        <li><a href="#">Five</a></li>
-        <li><a href="#">Six</a></li>
-      </ul>
-    </div>
-  </div>
-  
-  {% block content %}{% endblock %}
-  
 
-  <div class="row column">
-    <div class="callout primary">
-      <h3>Really big special this week on items.</h3>
+
+
+<body class="d-flex flex-column h-100">
+    <header>
+  <!-- Fixed navbar -->
+  <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
+    <a class="navbar-brand pr-3" href="#"><span style="text-shadow: 0 0 1em red; background-image: linear-gradient(to left, #D38312, #A83279); background-clip: text; font-weight: bold; color: transparent;">Scrap</span> <span style="font-weight: bold; ">Film</span></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Films <span class="sr-only">(actuelle)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Acteurs</a>
+        </li>
+      </ul>
+      <!-- <form class="form-inline mt-2 mt-md-0">
+        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      </form> -->
     </div>
+  </nav>
+</header>
+
+<!-- Begin page content -->
+<main role="main" class="flex-shrink-0">
+  <div class="container">
+        <div class="card-columns">
+            {% for movie in movies %}
+                
+                <div class="card" >
+                  <img style="position: absolute; filter: blur(1.8vw); -moz-filter: blur(2vw); -webkit-filter: blur(2vw); z-index:-1; width: 120%; margin: -10%;" src="{{ movie.img }}" class="card-img-top" alt="...">
+                  <img src="{{ movie.img }}" class="card-img-top" alt="...">
+                  <div class="progress" style="height: 15px;">
+                      <div class="progress-bar bg-danger" role="progressbar" style="width: {{ movie.rate }}%" aria-valuenow="{{ movie.rate }}" aria-valuemin="0" aria-valuemax="100">{{ movie.rate }}%</div>
+                    </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{ movie.name }}</h5>
+                    <p class="card-text" style="font-size: 0.9rem;">{{ movie.description }}</p>
+                    <p class="card-text"><small class="text-muted">{{ movie.years }}</small></p>
+                  </div>
+                </div>
+                {% endfor %}
+                
+    
   </div>
-  <hr>
-  <div class="row column text-center">
-    <h2>Some Other Neat Products</h2>
-    <hr>
+</main>
+
+<footer class="footer mt-auto py-3">
+  <div class="container">
+    <span class="text-muted">Developped by Jessy BREYNE and Axel SERRIE</span>
   </div>
-  <div class="row small-up-2 medium-up-3 large-up-6">
-    <div class="column">
-      <img class="thumbnail" src="https://placehold.it/300x400">
-      <h5>Nulla At Nulla Justo, Eget</h5>
-      <p>$400</p>
-      <a href="#" class="button small expanded hollow">Buy</a>
-    </div>
-    <div class="column">
-      <img class="thumbnail" src="https://placehold.it/300x400">
-      <h5>Nulla At Nulla Justo, Eget</h5>
-      <p>$400</p>
-      <a href="#" class="button small expanded hollow">Buy</a>
-    </div>
-    <div class="column">
-      <img class="thumbnail" src="https://placehold.it/300x400">
-      <h5>Nulla At Nulla Justo, Eget</h5>
-      <p>$400</p>
-      <a href="#" class="button small expanded hollow">Buy</a>
-    </div>
-    <div class="column">
-      <img class="thumbnail" src="https://placehold.it/300x400">
-      <h5>Nulla At Nulla Justo, Eget</h5>
-      <p>$400</p>
-      <a href="#" class="button small expanded hollow">Buy</a>
-    </div>
-    <div class="column">
-      <img class="thumbnail" src="https://placehold.it/300x400">
-      <h5>Nulla At Nulla Justo, Eget</h5>
-      <p>$400</p>
-      <a href="#" class="button small expanded hollow">Buy</a>
-    </div>
-    <div class="column">
-      <img class="thumbnail" src="https://placehold.it/300x400">
-      <h5>Nulla At Nulla Justo, Eget</h5>
-      <p>$400</p>
-      <a href="#" class="button small expanded hollow">Buy</a>
-    </div>
-  </div>
-  
-  <div class="callout large secondary">
-    <div class="row">
-      <div class="large-4 columns">
-        <h5>Projet universitaire</h5>
-        <p>Developped by Jessy.B and Axel.S || Framework : Foundation.</p>
-      </div>
-      <div class="large-3 large-offset-2 columns">
-        <ul class="menu vertical">
-          <li><a href="#">One</a></li>
-          <li><a href="#">Two</a></li>
-          <li><a href="#">Three</a></li>
-          <li><a href="#">Four</a></li>
-        </ul>
-      </div>
-      <div class="large-3 columns">
-        <ul class="menu vertical">
-          <li><a href="#">One</a></li>
-          <li><a href="#">Two</a></li>
-          <li><a href="#">Three</a></li>
-          <li><a href="#">Four</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="https://dhbhdrzi4tiry.cloudfront.net/cdn/sites/foundation.js"></script>
-  <script>
-    $(document).foundation();
-  </script>
+</footer>
 </body>
+    
 </html>
