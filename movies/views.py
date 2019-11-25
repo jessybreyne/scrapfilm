@@ -44,3 +44,9 @@ def response_change(request):
 class MoviesDetailView(DetailView):
     model = Movies
     context_object_name = 'movie'
+    template_name = "movies/movies_detail.html"
+
+class ActorDetailView(DetailView):
+    model = Actor
+    context_object_name = "actor"
+    template_name = "movies/actor_details.html"
