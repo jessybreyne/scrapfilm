@@ -11,6 +11,10 @@ def index(request):
     objets=Movies.objects.all().order_by('rate')
     return render(request,'movies/index.html',{'movies':objets})
 
+def actors(request):
+    objets=Actor.objects.all().order_by('surname')
+    return render(request,'movies/actors.html',{'actors':objets})
+
 def response_change(request):
     if request.method == "POST":
         newPost = request.POST
@@ -40,3 +44,9 @@ def response_change(request):
 class MoviesDetailView(DetailView):
     model = Movies
     context_object_name = 'movie'
+    template_name = "movies/movies_detail.html"
+
+class ActorDetailView(DetailView):
+    model = Actor
+    context_object_name = "actor"
+    template_name = "movies/actor_details.html"
