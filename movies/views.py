@@ -11,6 +11,10 @@ def index(request):
     objets=Movies.objects.all().order_by('rate')
     return render(request,'movies/index.html',{'movies':objets})
 
+def actors(request):
+    objets=Actor.objects.all().order_by('surname')
+    return render(request,'movies/actors.html',{'actors':objets})
+
 def response_change(request):
     if request.method == "POST":
         newPost = request.POST
