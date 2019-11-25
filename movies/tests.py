@@ -1,5 +1,5 @@
 from django.test import TestCase,Client
-from movies.models import Movies,ScrappingLoader
+from movies.models import Movies,ScrappingLoader,Actor
 from datetime import datetime,date
 # Create your tests here.
 
@@ -46,9 +46,15 @@ class RouteTestCase(TestCase):
         self.assertEqual(response.status_code,200)
 
     #Test de l'url detail renvoie un code 200
-    def test_url_detail_STATUS200(self):
+    def test_url_detailMovie_STATUS200(self):
         c = Client()
-        response = c.get("/detailsMovies/1")
+        response = c.get("/movie/1")
+        self.assertEqual(response.status_code,200)
+    
+    #Test de l'url detail renvoie un code 200
+    def test_url_actor_STATUS200(self):
+        c = Client()
+        response = c.get("/actors/")
         self.assertEqual(response.status_code,200)
 
 class ScrapingTestCase(TestCase):
