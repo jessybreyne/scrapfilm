@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.forms import ModelForm
-from movies.models import Movies,ScrappingLoader
+from movies.models import Movies,ScrappingLoader,Actor
 from django.views.generic import DetailView
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -44,7 +44,7 @@ def response_change(request):
 class MoviesDetailView(DetailView):
     model = Movies
     context_object_name = 'movie'
-    template_name = "movies/movies_detail.html"
+    template_name = "movies/movie_details.html"
 
 class ActorDetailView(DetailView):
     model = Actor
