@@ -1,5 +1,5 @@
 from django.test import TestCase,Client
-from movies.models import Movies,ScrappingLoader
+from movies.models import Movies,ScrappingLoader,Actor
 from datetime import datetime,date
 # Create your tests here.
 
@@ -39,6 +39,7 @@ class RouteTestCase(TestCase):
     def setUp(self):
         Movies.objects.create(name='Joker',img='#',rate=80,years="2019-10-09",description="C'est le joker qui est un méchant fou")
         Movies.objects.create(name="FightClub",img='#',rate=97,years="1999-03-18",description="Brandon se tappe sur la gueule")
+        Actor.objects.create(first_name="Jean Jack",surname="blablabla",img="blablabla")
     #Test de l'url index renvoie un code 200
     def test_url_index_STATUS200(self):
         c = Client()
@@ -46,9 +47,21 @@ class RouteTestCase(TestCase):
         self.assertEqual(response.status_code,200)
 
     #Test de l'url detail renvoie un code 200
-    def test_url_detail_STATUS200(self):
+    def test_url_detailMovie_STATUS200(self):
         c = Client()
-        response = c.get("/detailsMovies/1")
+        response = c.get("/movie/1")
+        self.assertEqual(response.status_code,200)
+    
+     #Test de l'url detail renvoie un code 200
+    def test_url_detailActor_STATUS200(self):
+        c = Client()
+        response = c.get("/actor/1")
+        self.assertEqual(response.status_code,200)
+    
+    #Test de l'url detail renvoie un code 200
+    def test_url_actor_STATUS200(self):
+        c = Client()
+        response = c.get("/actors/")
         self.assertEqual(response.status_code,200)
 
 class ScrapingTestCase(TestCase):
