@@ -8,8 +8,13 @@ from django.contrib.admin.models import LogEntry
 # Create your views here.
 
 def index(request):
-    objets=Movies.objects.all().order_by('rate')
+    objets=Movies.objects.all().order_by('-rate')
     return render(request,'movies/index.html',{'movies':objets})
+
+def search(request):
+    resultatMovie = Movies.objects.filter(name__contains=request.POST['search'])
+    resultatActor = Actor.objects.filter(Actor(first_name__contains=request.POST['search']) | Actor(surname__contains=request.POST['search'])) 
+    return render(request,'movies/search.html',{'resultsMovie':resultatMovie,'resultsActor':resultatActor})
 
 def actors(request):
     objets=Actor.objects.all().order_by('surname')
