@@ -13,7 +13,7 @@
                 </div>
                 {% endif %}
                 <div class="card-body">
-                    <h5 class="card-title">{{ movie.name }}</h5>
+                    <a href="/movie/{{ movie.id }}"><h5 class="card-title">{{ movie.name }}</h5></a>
                     <p class="card-text" style="font-size: 0.9rem;">{{ movie.description }}</p>
                     <p class="card-text"><small class="text-muted">{{ movie.years }}</small></p>
                 </div>

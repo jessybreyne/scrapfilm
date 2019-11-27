@@ -12,9 +12,14 @@ def index(request):
     return render(request,'movies/index.html',{'movies':objets})
 
 def search(request):
-    resultatMovie = Movies.objects.filter(name__contains=request.POST['search'])
-    resultatActor = Actor.objects.filter(Actor(first_name__contains=request.POST['search']) | Actor(surname__contains=request.POST['search'])) 
-    return render(request,'movies/search.html',{'resultsMovie':resultatMovie,'resultsActor':resultatActor})
+    if request.method == "POST":
+        newPost = request.POST
+        resultatMovie = Movies.objects.filter(name__contains=request.POST['search'])
+        resultatActor = Actor.objects.filter(first_name__contains=request.POST['search'])
+        return render(request,'movies/search.html',{'resultsMovie':resultatMovie,'resultsActor':resultatActor})
+    else:
+        message.error(request, "Une erreur est survenue lors de la recherche")
+        return redirect("./")
 
 def actors(request):
     objets=Actor.objects.all().order_by('surname')
