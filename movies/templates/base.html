@@ -14,18 +14,13 @@
     <header>
   <!-- Fixed navbar -->
   <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-    <a class="navbar-brand pr-3" href="#"><span style="text-shadow: 0 0 1em red; background-image: linear-gradient(to left, #D38312, #A83279); background-clip: text; font-weight: bold; color: transparent;">Scrap</span> <span style="font-weight: bold; ">Film</span></a>
+    <a class="navbar-brand pr-3" href="/"><span style="text-shadow: 0 0 1em red; background-image: linear-gradient(to left, #D38312, #A83279); background-clip: text; font-weight: bold; color: transparent;">Scrap</span> <span style="font-weight: bold; ">Film</span></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarCollapse">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link" href="/">Movies <span class="sr-only">(current)</span></a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="actors">Actors</a>
-        </li>
+        {% block menu %}{% endblock %}
       </ul>
       <form action="/search/" method="POST" class="form-inline mt-2 mt-md-0">
         {% csrf_token %}
