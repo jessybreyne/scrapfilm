@@ -72,7 +72,9 @@ class ScrappingLoader():
                 url2 = requests.get('https://www.themoviedb.org{}'.format(lien))
                 soup2 = BeautifulSoup(url2.text, "lxml")
                 acteurs = soup2.select("ol.people.scroller")
-                li = acteurs[0].findAll('li')
+                if acteurs:
+                        li = acteurs[0].findAll('li')
+                
                 ListActeurs = []
 
                 # On parcours les acteurs
