@@ -13,22 +13,33 @@
 
 
 <div class="row">
-
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-3">
             <div class="card" >
                 <img style="position: absolute; filter: blur(1.8vw); -moz-filter: blur(2vw); -webkit-filter: blur(2vw); z-index:-1; width: 120%; margin: -10%;" src="{{ actor.img }}" class="card-img-top" alt="...">
                 <img src="{{ actor.img }}" class="card-img-top" alt="...">
-                {% if movie.rate > 0 %}
-                <div class="progress" style="height: 15px;">
-                    <div class="progress-bar bg-danger" role="progressbar" style="width: {{ actor.rate }}%" aria-valuenow="{{ actor.rate }}" aria-valuemin="0" aria-valuemax="100">{{ actor.rate }}%</div>
-                </div>
-                {% endif %}
                 <div class="card-body">
-                    <a href="/actor/{{ actor.id }}"><h5 class="card-title">{{ actor.first_name }} {{ actor.surname }}</h5></a>
+                    <h5 class="card-title">{{ actor.first_name }}</h5>
                 </div>
             </div>
+        </div>
+        <!--
+        <div class="row">
+            {% for movie in actor.get_movies %}
+                <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-3">
+                    <a href="/movie/{{ movie.movie_id }}">
+                        <div class="card cardscale" >
+                            <img style="position: absolute; filter: blur(1.8vw); -moz-filter: blur(2vw); -webkit-filter: blur(2vw); z-index:-1; width: 120%; margin: -10%;" src="{{ actor.img }}" class="card-img-top" alt="...">
+                            <img src="{{ movie.movies.img }}" class="card-img-top" alt="...">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ movie.movies.name }}</h5>
+                                <h5 class="card-info">{{ movie.acteur.surname }}</h5>
+                            </div>
+                        </div>
+                    </a>
+                </div>    
+            {% endfor %}
         </div>    
-
+        -->
 </div>
 
 {% endblock %}

@@ -5,6 +5,7 @@ from django.views.generic import DetailView
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.admin.models import LogEntry 
+from django.db.models import Max
 # Create your views here.
 
 def index(request):
@@ -22,7 +23,7 @@ def search(request):
         return redirect("./")
 
 def actors(request):
-    objets=Actor.objects.all().order_by('surname')
+    objets= Actor.objects.values('first_name','img').annotate(id=Max('id')).order_by('first_name')
     return render(request,'movies/actors.html',{'actors':objets})
 
 def response_change(request):
