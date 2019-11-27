@@ -10,8 +10,11 @@
 {% endblock %}
 {% block content %}
 
-
-
+<!-- POUR METTRE LES ACTEURS DU FILM a placer en dessous du film c'est juste le script ! ! ! -->
+{% for actor in movie.get_actors %}
+    <p>{{ actor.acteur.first_name }} {{ actor.acteur.surname }}</p>
+{% endfor %}
+<!-- Il y a encore l'attribut img et tu pourras mettre son id pour se deplacer sur sa page de detail -->
 <div class="row">
         <div class="col-12 col-sm-6 col-md-4 col-lg-3 pb-3">
             <div class="card" >
