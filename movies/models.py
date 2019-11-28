@@ -20,8 +20,10 @@ class Movies(models.Model):
         return self.name+" "+self.years.strftime("%Y-%m-%d")
 
     def get_actors(self):
-        obj = self.movie_has_actor_set.all()
-        return obj
+        return self.movie_has_actor_set.all()
+
+    def get_commentaires(self):
+        return self.commentaires_set.all()
 
 # Class Actor qui sera lié à Movie via une troisième class
 
