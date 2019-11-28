@@ -130,3 +130,8 @@ class ScrappingLoader():
                 for acteur in film["acteurs"]:
                         leActeur = Actor.objects.create(first_name=acteur["nom"], surname=acteur["role"], img=acteur["image"])
                         Movie_has_Actor.objects.create(movie=leFilm,acteur=leActeur)
+
+    class Commentaire(models.Model):
+        username = models.CharField(max_length=50)
+        commentaire = models.TextField(null=True)
+        movie_id = models.ForeignKey("Movies", on_delete=models.CASCADE)
