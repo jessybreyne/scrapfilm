@@ -24,6 +24,9 @@ class Movies(models.Model):
 
     def get_commentaires(self):
         return self.commentaire_set.all()
+    
+    def get_nbCommentaires(self):
+        return self.commentaire_set.all().count()
 
 # Class Actor qui sera lié à Movie via une troisième class
 
