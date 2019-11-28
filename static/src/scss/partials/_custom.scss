@@ -25,6 +25,19 @@ main > .container {
     background-color: rgba(2, 4, 6, 0.2) !important;
 }
 
+a {
+    text-decoration: none;
+}
+
+.cardscale {
+    transition: all 0.5s ease-out;
+    color: white;
+}
+
+.cardscale:hover {
+    transform: scale(1.02);
+}
+
 .progress {
     border-radius: 0 !important;
 }

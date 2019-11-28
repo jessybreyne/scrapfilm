@@ -19,6 +19,10 @@ class Movies(models.Model):
     def __str__(self):
         return self.name+" "+self.years.strftime("%Y-%m-%d")
 
+    def get_actors(self):
+        obj = self.movie_has_actor_set.all()
+        return obj
+
 # Class Actor qui sera lié à Movie via une troisième class
 
 class Actor(models.Model):
@@ -36,6 +40,8 @@ class Movie_has_Actor(models.Model):
     movie = models.ForeignKey("Movies", on_delete=models.CASCADE)
     acteur = models.ForeignKey("Actor", on_delete=models.CASCADE)
 
+    def __str__(self):
+        return self.movie.name + " : " + self.acteur.first_name
 #URL_IMG = "https://image.tmdb.org/t/p/w500/"
 class ScrappingLoader():
     @staticmethod
@@ -72,7 +78,9 @@ class ScrappingLoader():
                 url2 = requests.get('https://www.themoviedb.org{}'.format(lien))
                 soup2 = BeautifulSoup(url2.text, "lxml")
                 acteurs = soup2.select("ol.people.scroller")
-                li = acteurs[0].findAll('li')
+                if acteurs:
+                        li = acteurs[0].findAll('li')
+                
                 ListActeurs = []
 
                 # On parcours les acteurs

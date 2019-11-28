@@ -1,18 +1,29 @@
 from django.shortcuts import render
 from django.forms import ModelForm
-from movies.models import Movies,ScrappingLoader,Actor
+from movies.models import Movies,ScrappingLoader,Actor,Movie_has_Actor
 from django.views.generic import DetailView
 from django.contrib import messages
 from django.shortcuts import redirect
 from django.contrib.admin.models import LogEntry 
+from django.db.models import Max
 # Create your views here.
 
 def index(request):
-    objets=Movies.objects.all().order_by('rate')
+    objets=Movies.objects.all().order_by('-rate')
     return render(request,'movies/index.html',{'movies':objets})
 
+def search(request):
+    if request.method == "POST":
+        newPost = request.POST
+        resultatMovie = Movies.objects.filter(name__contains=request.POST['search'])
+        resultatActor = Actor.objects.filter(first_name__contains=request.POST['search'])
+        return render(request,'movies/search.html',{'resultsMovie':resultatMovie,'resultsActor':resultatActor})
+    else:
+        message.error(request, "Une erreur est survenue lors de la recherche")
+        return redirect("./")
+
 def actors(request):
-    objets=Actor.objects.all().order_by('surname')
+    objets= Actor.objects.values('first_name','img').annotate(id=Max('id')).order_by('first_name')
     return render(request,'movies/actors.html',{'actors':objets})
 
 def response_change(request):
@@ -43,7 +54,7 @@ def response_change(request):
 
 class MoviesDetailView(DetailView):
     model = Movies
-    context_object_name = 'movie'
+    context_object_name = "movie"   
     template_name = "movies/movie_details.html"
 
 class ActorDetailView(DetailView):
