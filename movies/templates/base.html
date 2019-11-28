@@ -6,6 +6,9 @@
   <title>{% block title %}{% endblock %}</title>
   {% load static %}
   <script type="text/javascript" src="{% static "main.bundle.js" %}"></script>
+  <script type="text/javascript" src="{% static "jquery.slim.min.js" %}"></script>
+  <script type="text/javascript" src="{% static "util.js" %}"></script>
+  <script type="text/javascript" src="{% static "alert.js" %}"></script>
 </head>
 
 
@@ -32,22 +35,22 @@
 </header>
 
 <!-- CECI EST A REMETTRE EN PAGE -->
-{% if messages %}
-<div class="messages" style="margin-top:100px;">
-    {% for message in messages %}
-    <div{% if message.tags %} class="alert alert-{%if "error" in message.tags %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show"{% endif %} role="alert">{{ message }}
-        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-    </div>
-    {% endfor %}
-</div>
-{% endif %}
+
 <!-- JESSY C'EST POUR TOI -->
 <!-- Begin page content -->
 <main role="main" class="flex-shrink-0">
   <div class="container">
-       
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div{% if message.tags %} class="alert alert-{%if "error" in message.tags %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show"{% endif %} role="alert">{{ message }}
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
       {% block content %}{% endblock %}
     
   </div>

@@ -39,7 +39,7 @@
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-3">
                     <a href="/actor/{{ actor.acteur.id }}">
                         <div class="card cardscale" >
-                            <img style="position: absolute; filter: blur(1.8vw); -moz-filter: blur(2vw); -webkit-filter: blur(2vw); z-index:-1; width: 120%; margin: -10%;" src="{{ actor.img }}" class="card-img-top" alt="...">
+                            <img style="position: absolute; filter: blur(1.8vw); -moz-filter: blur(2vw); -webkit-filter: blur(2vw); z-index:-1; width: 120%; margin: -10%;" src="{{ actor.acteur.img }}" class="card-img-top" alt="...">
                             <img src="{{ actor.acteur.img }}" class="card-img-top" alt="...">
                             <div class="card-body">
                                 <h5 class="card-title">{{ actor.acteur.first_name }}</h5>
@@ -53,19 +53,20 @@
     </div>  
 </div>
 
-<h2>Comments</h2>
+<h2>Comments {% if movie.get_nbCommentaires > 0 %}({{ movie.get_nbCommentaires }}){% endif %}</h2>
 
 {% for comment in movie.get_commentaires %}
-    <div class="card" >
+    <div class="card mb-3" >
         <div class="card-body">
-            <form action="/rm-commentaire/" method="POST">
-                {% csrf_token %}
-                <input type="hidden" name="movie_id" value="{{ movie.id }}">
-                <input type="hidden" name="id" value="{{ comment.id }}">
-                <div style="text-align:right;"><button type="submit">Supprimer</button></div>
-            </form> 
+                <form action="/rm-commentaire/" method="POST">
+                    {% csrf_token %}
+                    <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                    <input type="hidden" name="id" value="{{ comment.id }}">
+                    <button class="close" type="submit" style="text-shadow: 0 1px 0 #606060 !important;"><span style="color: red;" aria-hidden="true">×</span></button>
+                </form> 
             <h2 class="card-title">{{ comment.username }}</h2>
             <p class="card-text">{{ comment.commentaire }}</p>
+            
         </div>
     </div>
 {% endfor %}
