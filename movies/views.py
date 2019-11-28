@@ -12,29 +12,30 @@ def index(request):
     objets=Movies.objects.all().order_by('-rate')
     return render(request,'movies/index.html',{'movies':objets})
 
-def search(request):
+def search(request): 
     if request.method == "POST":
         newPost = request.POST
-        resultatMovie = Movies.objects.filter(name__contains=request.POST['search'])
-        resultatActor = Actor.objects.filter(first_name__contains=request.POST['search'])
+        # Deux querySets afin d'afficher les films et les acteurs
+        resultatMovie = Movies.objects.filter(name__contains=request.POST['search']) # Doit contenir le mot clef
+        resultatActor = Actor.objects.filter(first_name__contains=request.POST['search']) # Doit contenir le mot clef
         return render(request,'movies/search.html',{'resultsMovie':resultatMovie,'resultsActor':resultatActor})
     else:
         message.error(request, "Une erreur est survenue lors de la recherche")
         return redirect("./")
 
 def actors(request):
-    objets= Actor.objects.values('first_name','img').annotate(id=Max('id')).order_by('first_name')
+    objets= Actor.objects.values('first_name','img').annotate(id=Max('id')).order_by('first_name') #Permet d'éviter le dédoublement d'information des acteurs via le Max(ID)
     return render(request,'movies/actors.html',{'actors':objets})
 
 def add_commentaires(request):
     if request.method == "POST":
         newPost = request.POST
         if newPost['username']!='' and newPost['message']!='':
-            messages.success(request, "Commentaire envoyé")
+            messages.success(request, "Commentaire envoyé") 
             movie = Movies.objects.get(id=newPost['movie_id'])
-            Commentaire.objects.create(username=newPost['username'],commentaire=newPost['message'],movie_id=movie)
+            Commentaire.objects.create(username=newPost['username'],commentaire=newPost['message'],movie_id=movie) #Creation dans la BD du commentaire
         else:
-            messages.error(request,"Il manque une information importante")
+            messages.error(request,"Il manque une information importante") #Permet d'afficher les messages d'information
     else:
         messages.error(request, "Une erreur est survenue")
     return redirect("/movie/"+newPost['movie_id'])
@@ -52,6 +53,11 @@ def rm_commentaires(request):
     return redirect("/movie/"+newPost['movie_id'])
 
 def response_change(request):
+    """
+        Script qui lance le scrapping via depuis l'admin
+        Return sur l'index de l'admin avec un message d'information
+        Enregistrement dans les logs
+    """
     if request.method == "POST":
         newPost = request.POST
         if 'page' in newPost.keys():

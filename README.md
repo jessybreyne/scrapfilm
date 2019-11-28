@@ -15,8 +15,8 @@ Installation
 	pip install -r requirements.txt
 
 - Installer les fichiers static :
-	cd static
-	yarn install
+	- cd static
+	- yarn install
 
 - Création de la BD :
 	./manage.py migrate
@@ -49,3 +49,13 @@ Features importantes
 
 - Details des films
 - Details des acteurs
+
+Fonctionnalités dans les features
+=====
+
+- count()
+- LogEntry
+- messages
+- DetailView
+- modelAdmin
+- querySet
