@@ -23,7 +23,7 @@ class Movies(models.Model):
         return self.movie_has_actor_set.all()
 
     def get_commentaires(self):
-        return self.commentaires_set.all()
+        return self.commentaire_set.all()
 
 # Class Actor qui sera lié à Movie via une troisième class
 
@@ -133,7 +133,7 @@ class ScrappingLoader():
                         leActeur = Actor.objects.create(first_name=acteur["nom"], surname=acteur["role"], img=acteur["image"])
                         Movie_has_Actor.objects.create(movie=leFilm,acteur=leActeur)
 
-    class Commentaire(models.Model):
-        username = models.CharField(max_length=50)
-        commentaire = models.TextField(null=True)
-        movie_id = models.ForeignKey("Movies", on_delete=models.CASCADE)
+class Commentaire(models.Model):
+    username = models.CharField(max_length=50)
+    commentaire = models.TextField(null=True)
+    movie_id = models.ForeignKey("Movies", on_delete=models.CASCADE)

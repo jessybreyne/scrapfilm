@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.forms import ModelForm
-from movies.models import Movies,ScrappingLoader,Actor,Movie_has_Actor
+from movies.models import Movies,ScrappingLoader,Actor,Movie_has_Actor,Commentaire
 from django.views.generic import DetailView
 from django.contrib import messages
 from django.shortcuts import redirect
@@ -25,6 +25,31 @@ def search(request):
 def actors(request):
     objets= Actor.objects.values('first_name','img').annotate(id=Max('id')).order_by('first_name')
     return render(request,'movies/actors.html',{'actors':objets})
+
+def add_commentaires(request):
+    if request.method == "POST":
+        newPost = request.POST
+        if newPost['username']!='' and newPost['message']!='':
+            messages.success(request, "Commentaire envoyé")
+            movie = Movies.objects.get(id=newPost['movie_id'])
+            Commentaire.objects.create(username=newPost['username'],commentaire=newPost['message'],movie_id=movie)
+        else:
+            messages.error(request,"Il manque une information importante")
+    else:
+        messages.error(request, "Une erreur est survenue")
+    return redirect("/movie/"+newPost['movie_id'])
+
+def rm_commentaires(request):
+    if request.method == "POST":
+        newPost = request.POST
+        if newPost['id']:
+            messages.warning(request, "Commentaire supprimé")
+            Commentaire.objects.get(id=newPost['id']).delete()
+        else:
+            messages.error(request,"Le message n'a pas pus être supprimé (IDERROR)")
+    else:
+        messages.error(request, "Une erreur est survenue")
+    return redirect("/movie/"+newPost['movie_id'])
 
 def response_change(request):
     if request.method == "POST":

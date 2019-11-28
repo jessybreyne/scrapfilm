@@ -77,5 +77,3 @@ class ScrapingTestCase(TestCase):
     def test_liste_films_en_bd(self):
         ScrappingLoader().toDb(1)
         self.assertTrue(Movies.objects.get(id=1)) 
-    
-
