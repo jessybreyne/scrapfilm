@@ -37,7 +37,7 @@
         <div class="row">
             {% for actor in movie.get_actors %}
                 <div class="col-6 col-sm-6 col-md-4 col-lg-3 mb-3">
-                    <a href="/actor/{{ actor.id }}">
+                    <a href="/actor/{{ actor.acteur.id }}">
                         <div class="card cardscale" >
                             <img style="position: absolute; filter: blur(1.8vw); -moz-filter: blur(2vw); -webkit-filter: blur(2vw); z-index:-1; width: 120%; margin: -10%;" src="{{ actor.img }}" class="card-img-top" alt="...">
                             <img src="{{ actor.acteur.img }}" class="card-img-top" alt="...">
@@ -55,11 +55,17 @@
 
 <h2>Comments</h2>
 
-{% for comment in comments %}
+{% for comment in movie.get_commentaires %}
     <div class="card" >
         <div class="card-body">
-            <h2 class="card-title">{{ comment.name }}</h2>
-            <p class="card-text">{{ comment.message }}</p>
+            <form action="/rm-commentaire/" method="POST">
+                {% csrf_token %}
+                <input type="hidden" name="movie_id" value="{{ movie.id }}">
+                <input type="hidden" name="id" value="{{ comment.id }}">
+                <div style="text-align:right;"><button type="submit">Supprimer</button></div>
+            </form> 
+            <h2 class="card-title">{{ comment.username }}</h2>
+            <p class="card-text">{{ comment.commentaire }}</p>
         </div>
     </div>
 {% endfor %}
@@ -67,15 +73,16 @@
 
 <div class="card" >
     <div class="card-body">
-        <form>
+        <form action="/add-commentaire/" method="POST">
+            {% csrf_token %}
             <div class="form-group">
                 <label for="name">Your name</label>
-                <input type="text" class="form-control" id="name">
+                <input type="text" class="form-control" name="username" id="username">
             </div>
-        
+            <input type="hidden" name="movie_id" value="{{ movie.id }}">
             <div class="form-group">
                 <label for="message">Your message</label>
-                <textarea class="form-control" id="message" rows="3"></textarea>
+                <textarea class="form-control" id="message" name="message" rows="3"></textarea>
             </div>
         
             <button type="submit" class="btn btn-outline-danger btn-block mb-2">Send</button>

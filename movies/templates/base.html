@@ -31,6 +31,19 @@
   </nav>
 </header>
 
+<!-- CECI EST A REMETTRE EN PAGE -->
+{% if messages %}
+<div class="messages" style="margin-top:100px;">
+    {% for message in messages %}
+    <div{% if message.tags %} class="alert alert-{%if "error" in message.tags %}danger{% else %}{{ message.tags }}{% endif %} alert-dismissible fade show"{% endif %} role="alert">{{ message }}
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}
+<!-- JESSY C'EST POUR TOI -->
 <!-- Begin page content -->
 <main role="main" class="flex-shrink-0">
   <div class="container">
