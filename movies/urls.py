@@ -7,7 +7,9 @@ urlpatterns=[
     path('actor/<int:pk>',ActorDetailView.as_view(),name='detailsActor'),
     path('movie/<int:pk>',MoviesDetailView.as_view(),name='detailsMovie'),
     path('search/',search,name='search'),
+    #Chemin des commentaires 
     path('add-commentaire/',add_commentaires,name="addCommentaire"),
     path('rm-commentaire/',rm_commentaires,name="rmCommentaire"),
+    #Chemin de l'admin
     path('admin/scrap',response_change,name="admin")
 ]

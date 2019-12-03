@@ -20,10 +20,10 @@ class Movies(models.Model):
         return self.name+" "+self.years.strftime("%Y-%m-%d")
 
     def get_actors(self):
-        return self.movie_has_actor_set.all()
+        return self.movie_has_actor_set.all() #Récupère via clé étrangère les acteurs
 
     def get_commentaires(self):
-        return self.commentaire_set.all()
+        return self.commentaire_set.all() #Recupère via clé étrangères les 
     
     def get_nbCommentaires(self):
         return self.commentaire_set.all().count()
